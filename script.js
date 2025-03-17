@@ -46,7 +46,7 @@ form.onsubmit = (event) => {
     //Chama a função para adicionar a nova despesa
     expenseAdd(newExpense);
 }
-
+//Adiciona um novo item na lista
 function expenseAdd(newExpense) {
   try{
     //Cria um novo elemento li para a lista de despesas
@@ -78,8 +78,16 @@ function expenseAdd(newExpense) {
     expenseAmount.classList.add('expense-amount');
     expenseAmount.innerHTML = `<small>R$</small> ${newExpense.amount.toUpperCase().replace('R$', '')}`;
 
+
+    //Cria o icone de excluir
+    const removeIcon = document.createElement('img');
+    removeIcon.classList.add('remove-icon');
+    removeIcon.setAttribute("src", 'img/remove.svg');
+    removeIcon.setAttribute("alt", 'Remover');
+    
+    
     //Adiciona as info no item
-    expenseItem.append(expenseIcon, expenseInfo, expenseAmount);
+    expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon);
     expenseList.append(expenseItem);
     
   }catch (error){
