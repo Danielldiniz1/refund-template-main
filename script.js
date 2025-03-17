@@ -12,7 +12,7 @@ amount.oninput = () => {
 
     //Transforma o valor em centavos
     value = Number(value) / 100;
-    
+
     //Atualiza o valor do input
     amount.value = formatCurrencyBRL(value);
 }
@@ -23,7 +23,34 @@ function formatCurrencyBRL(value) {
         style: 'currency',
         currency: 'BRL'
     });
+    //retorna o valor formatado
     return value;
 }
 
+//Captura o evento de submit do formulário
+form.onsubmit = (event) => {
+    event.preventDefault();
+//Objeto com detalhes da nova despesa
+    const newExpense = {
+        id: new Date().getTime(),
+        expense: expense.value,
+        category_id: category.value,
+        category_name: category.options[category.selectedIndex].text,
+        amount: amount.value,
+        created_at: new Date(),
+    }
+    //console.log(newExpense);
+    //Chama a função para adicionar a nova despesa
+    expenseAdd(newExpense);
+}
 
+function expenseAdd(newExpense) {
+  try{
+    
+  }catch (error){
+    alert("Não foi possivel atualizar a lista de despesas");
+    console.log(error);
+    
+  }
+
+}
