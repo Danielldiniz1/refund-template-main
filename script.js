@@ -8,6 +8,7 @@ const amount = document.querySelector('#amount');
 //Seleciona os elementos da lista 
 const expenseList = document.querySelector('ul');
 const expensesQuantity = document.querySelector('aside header p span');
+const expensesTotal = document.querySelector("aside header h2")
 
 //Capturando o evento de input do campo de valor
 amount.oninput = () => {
@@ -109,6 +110,22 @@ function updateTotals(){
         //Atualiza a quantidade de despesas
         expensesQuantity.textContent = `${items.length} ${items.length > 1 ? "Despesas" : "Despesa"}`;
         
+        //Variavel para incrementar o total.
+        let total = 0;
+        //Percorre cada item (li) da lista (ul)
+        for(let item = 0; item < items.length; item++){
+            const itemAmount = items[item].querySelector('.expense-amount');
+
+            let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(",",".");
+
+            //Converte o valor para float
+            value = parseFloat(value);
+            if (isNaN(value)) {
+                return alert("Não foi possivel atualizar os totais");
+            }
+            total += Number(value);
+        }
+        expensesTotal.textContent = total
     } catch (error) {
         console.log(error);
         alert("Não foi possivel atualizar os totais");
